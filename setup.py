@@ -195,7 +195,7 @@ def get_extensions():
             pass
         project_dir = 'mmcv/ops/csrc/'
         if is_rocm_parrots:
-            from parrots.utils.hipify import hipify_python
+            from hipify import hipify_python
             hipify_python.hipify(
                 project_directory=project_dir,
                 output_directory=project_dir,
