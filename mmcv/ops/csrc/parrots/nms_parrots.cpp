@@ -1,4 +1,5 @@
 // Copyright (c) OpenMMLab. All rights reserved
+#include "hip/hip_runtime.h"
 #include <parrots/compute/aten.hpp>
 #include <parrots/extension.hpp>
 #include <parrots/foundation/ssattrs.hpp>
@@ -66,7 +67,7 @@ void nms_match_parrots(T& ctx, const SSElement& attr,
   auto tensor = torch::zeros({n, m}, options);
   for (int i = 0; i < n; i++)
     tensor.slice(0, i, i + 1) =
-        torch::from_blob(out[i].data(), {out[i].size()}, options);
+        torch::from_blob(out[i].data(), {static_cast<long>(out[i].size())}, options);
   updateDArray(ctx, tensor, outs[0]);
 }
 
