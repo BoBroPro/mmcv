@@ -237,7 +237,7 @@ def get_extensions():
             language='clang++',
             extra_compile_args=extra_compile_args,
             cuda=True,
-            pytorch=False)
+            pytorch=True)
         extensions.append(ext_ops)
     elif EXT_TYPE == 'pytorch':
         ext_name = 'mmcv._ext'
