@@ -1,5 +1,4 @@
 // Copyright (c) OpenMMLab. All rights reserved
-#include "hip/hip_runtime.h"
 #include <parrots/compute/aten.hpp>
 #include <parrots/extension.hpp>
 #include <parrots/foundation/ssattrs.hpp>
