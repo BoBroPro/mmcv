@@ -31,6 +31,9 @@ MATH_TRANSPILATIONS = collections.OrderedDict(
 
 CUDA_TYPE_NAME_MAP = collections.OrderedDict(
     [
+	# *******************self-defined for parrots begins************************
+        ("CudaContext", ("HipContext", CONV_TYPE, API_DRIVER)),
+	# *******************self-defined for parrots ends************************
         ("CUresult", ("hipError_t", CONV_TYPE, API_DRIVER)),
         ("cudaError_t", ("hipError_t", CONV_TYPE, API_RUNTIME)),
         (
