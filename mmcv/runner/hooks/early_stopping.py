@@ -50,7 +50,7 @@ class EarlyStoppingHook(Hook):
     Example:
         >>> EarlyStoppingHook('loss', mode='min', divergence_threshold=100)
         >>> # if loss > 100, training will be stopped
-        >>> EarlyStoppingHook('loss', mode='min', stopping_treshold=0.01)
+        >>> EarlyStoppingHook('loss', mode='min', stopping_threshold=0.01)
         >>> # if loss < 0.01, training will be stopped regardless of patience.
     """
 
