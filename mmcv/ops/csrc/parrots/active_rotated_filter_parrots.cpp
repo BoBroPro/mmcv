@@ -8,7 +8,7 @@ using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
 void active_rotated_filter_forward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   auto input = buildATensor(ctx, ins[0]);
   auto indices = buildATensor(ctx, ins[1]);
@@ -17,7 +17,7 @@ void active_rotated_filter_forward_cuda_parrots(
 }
 
 void active_rotated_filter_backward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   auto grad_out = buildATensor(ctx, ins[0]);
   auto indices = buildATensor(ctx, ins[1]);

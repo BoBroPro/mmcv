@@ -8,7 +8,7 @@
 using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
-void masked_im2col_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void masked_im2col_forward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                         const OperatorBase::in_list_t& ins,
                                         OperatorBase::out_list_t& outs) {
   // im: (n, ic, h, w), kernel size (kh, kw)
@@ -30,7 +30,7 @@ void masked_im2col_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
                              kernel_w, pad_h, pad_w);
 }
 
-void masked_col2im_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void masked_col2im_forward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                         const OperatorBase::in_list_t& ins,
                                         OperatorBase::out_list_t& outs) {
   // im: (n, ic, h, w), kernel size (kh, kw)

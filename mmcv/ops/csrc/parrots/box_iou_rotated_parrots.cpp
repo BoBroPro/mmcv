@@ -32,7 +32,7 @@ void box_iou_rotated_cpu_parrots(HostContext& ctx, const SSElement& attr,
  * void box_iou_rotated_cuda(const Tensor boxes1, const Tensor boxes2, Tensor
  * ious, const int mode_flag, const bool aligned);
  */
-void box_iou_rotated_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void box_iou_rotated_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                   const OperatorBase::in_list_t& ins,
                                   OperatorBase::out_list_t& outs) {
   bool aligned;

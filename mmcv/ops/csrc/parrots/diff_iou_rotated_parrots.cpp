@@ -9,7 +9,7 @@ using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
 void diff_iou_rotated_sort_vertices_forward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   at::Tensor boxes, scores, dets;
   auto vertices = buildATensor(ctx, ins[0]);

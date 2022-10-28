@@ -7,7 +7,7 @@
 using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
-void sync_bn_forward_mean_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void sync_bn_forward_mean_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                        const OperatorBase::in_list_t& ins,
                                        OperatorBase::out_list_t& outs) {
   const auto& input = buildATensor(ctx, ins[0]);
@@ -15,7 +15,7 @@ void sync_bn_forward_mean_cuda_parrots(CudaContext& ctx, const SSElement& attr,
   sync_bn_forward_mean_cuda(input, mean);
 }
 
-void sync_bn_forward_var_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void sync_bn_forward_var_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                       const OperatorBase::in_list_t& ins,
                                       OperatorBase::out_list_t& outs) {
   const auto& input = buildATensor(ctx, ins[0]);
@@ -24,7 +24,7 @@ void sync_bn_forward_var_cuda_parrots(CudaContext& ctx, const SSElement& attr,
   sync_bn_forward_var_cuda(input, mean, var);
 }
 
-void sync_bn_forward_output_cuda_parrots(CudaContext& ctx,
+void sync_bn_forward_output_cuda_parrots(DeviceContext& ctx,
                                          const SSElement& attr,
                                          const OperatorBase::in_list_t& ins,
                                          OperatorBase::out_list_t& outs) {
@@ -51,7 +51,7 @@ void sync_bn_forward_output_cuda_parrots(CudaContext& ctx,
                               group_size);
 }
 
-void sync_bn_backward_param_cuda_parrots(CudaContext& ctx,
+void sync_bn_backward_param_cuda_parrots(DeviceContext& ctx,
                                          const SSElement& attr,
                                          const OperatorBase::in_list_t& ins,
                                          OperatorBase::out_list_t& outs) {
@@ -62,7 +62,7 @@ void sync_bn_backward_param_cuda_parrots(CudaContext& ctx,
   sync_bn_backward_param_cuda(grad_output, norm, grad_weight, grad_bias);
 }
 
-void sync_bn_backward_data_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void sync_bn_backward_data_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                         const OperatorBase::in_list_t& ins,
                                         OperatorBase::out_list_t& outs) {
   const auto& grad_output = buildATensor(ctx, ins[0]);

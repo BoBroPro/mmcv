@@ -7,7 +7,7 @@
 using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
-void roi_align_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void roi_align_forward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                     const OperatorBase::in_list_t& ins,
                                     OperatorBase::out_list_t& outs) {
   int aligned_height;
@@ -35,7 +35,7 @@ void roi_align_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
                          sampling_ratio, pool_mode, aligned);
 }
 
-void roi_align_backward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void roi_align_backward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                      const OperatorBase::in_list_t& ins,
                                      OperatorBase::out_list_t& outs) {
   int aligned_height;

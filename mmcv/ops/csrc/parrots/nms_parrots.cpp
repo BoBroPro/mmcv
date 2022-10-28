@@ -66,7 +66,7 @@ void nms_match_parrots(T& ctx, const SSElement& attr,
   auto tensor = torch::zeros({n, m}, options);
   for (int i = 0; i < n; i++)
     tensor.slice(0, i, i + 1) =
-        torch::from_blob(out[i].data(), {out[i].size()}, options);
+        torch::from_blob(out[i].data(), {static_cast<int32_t>(out[i].size())}, options);
   updateDArray(ctx, tensor, outs[0]);
 }
 
@@ -100,7 +100,7 @@ PARROTS_EXTENSION_REGISTER(nms)
     .output(1)
     .apply(nms_parrots<HostContext>)
 #ifdef MMCV_WITH_CUDA
-    .apply(nms_parrots<CudaContext>)
+    .apply(nms_parrots<DeviceContext>)
 #endif
     .done();
 
@@ -114,7 +114,7 @@ PARROTS_EXTENSION_REGISTER(softnms)
     .output(1)
     .apply(softnms_parrots<HostContext>)
 #ifdef MMCV_WITH_CUDA
-    .apply(softnms_parrots<CudaContext>)
+    .apply(softnms_parrots<DeviceContext>)
 #endif
     .done();
 
@@ -124,7 +124,7 @@ PARROTS_EXTENSION_REGISTER(nms_match)
     .output(1)
     .apply(nms_match_parrots<HostContext>)
 #ifdef MMCV_WITH_CUDA
-    .apply(nms_match_parrots<CudaContext>)
+    .apply(nms_match_parrots<DeviceContext>)
 #endif
     .done();
 
@@ -135,6 +135,6 @@ PARROTS_EXTENSION_REGISTER(nms_rotated)
     .output(1)
     .apply(nms_rotated_parrots<HostContext>)
 #ifdef MMCV_WITH_CUDA
-    .apply(nms_rotated_parrots<CudaContext>)
+    .apply(nms_rotated_parrots<DeviceContext>)
 #endif
     .done();

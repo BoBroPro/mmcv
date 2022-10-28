@@ -8,7 +8,7 @@ using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
 void rotated_feature_align_forward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   float spatial_scale;
   int points;
@@ -25,7 +25,7 @@ void rotated_feature_align_forward_cuda_parrots(
 }
 
 void rotated_feature_align_backward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   float spatial_scale;
   int points;

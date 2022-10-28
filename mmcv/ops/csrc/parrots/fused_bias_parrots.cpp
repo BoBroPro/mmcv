@@ -12,7 +12,7 @@ torch::Tensor fused_bias_leakyrelu(const torch::Tensor &input,
                                    const torch::Tensor &refer, int act,
                                    int grad, float alpha, float scale);
 
-void fused_bias_leakyrelu_parrots(CudaContext &ctx, const SSElement &attr,
+void fused_bias_leakyrelu_parrots(DeviceContext &ctx, const SSElement &attr,
                                   const OperatorBase::in_list_t &ins,
                                   OperatorBase::out_list_t &outs) {
   int act, grad;

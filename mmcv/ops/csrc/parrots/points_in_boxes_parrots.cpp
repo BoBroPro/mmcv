@@ -9,7 +9,7 @@ using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
 void points_in_boxes_part_forward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   auto boxes_tensor = buildATensor(ctx, ins[0]);
   auto pts_tensor = buildATensor(ctx, ins[1]);
@@ -21,7 +21,7 @@ void points_in_boxes_part_forward_cuda_parrots(
 }
 
 void points_in_boxes_all_forward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   auto boxes_tensor = buildATensor(ctx, ins[0]);
   auto pts_tensor = buildATensor(ctx, ins[1]);

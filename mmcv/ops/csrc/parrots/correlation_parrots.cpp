@@ -8,7 +8,7 @@
 using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
-void correlation_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void correlation_forward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                       const OperatorBase::in_list_t& ins,
                                       OperatorBase::out_list_t& outs) {
   int kH, kW, patchH, patchW, padH, padW, dilationH, dilationW, dilation_patchH,
@@ -38,7 +38,7 @@ void correlation_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
                       dilation_patchW, dH, dW);
 }
 
-void correlation_backward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void correlation_backward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                        const OperatorBase::in_list_t& ins,
                                        OperatorBase::out_list_t& outs) {
   int kH, kW, patchH, patchW, padH, padW, dilationH, dilationW, dilation_patchH,

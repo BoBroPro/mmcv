@@ -8,7 +8,7 @@
 using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
-void three_interpolate_forward_cuda_parrots(CudaContext& ctx,
+void three_interpolate_forward_cuda_parrots(DeviceContext& ctx,
                                             const SSElement& attr,
                                             const OperatorBase::in_list_t& ins,
                                             OperatorBase::out_list_t& outs) {
@@ -30,7 +30,7 @@ void three_interpolate_forward_cuda_parrots(CudaContext& ctx,
                             out_tensor, b, c, m, n);
 }
 
-void three_interpolate_backward_cuda_parrots(CudaContext& ctx,
+void three_interpolate_backward_cuda_parrots(DeviceContext& ctx,
                                              const SSElement& attr,
                                              const OperatorBase::in_list_t& ins,
                                              OperatorBase::out_list_t& outs) {

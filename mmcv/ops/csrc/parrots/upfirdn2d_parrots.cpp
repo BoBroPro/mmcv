@@ -11,7 +11,7 @@ torch::Tensor upfirdn2d(const Tensor &input, const Tensor &kernel, int up_x,
                         int up_y, int down_x, int down_y, int pad_x0,
                         int pad_x1, int pad_y0, int pad_y1);
 
-void upfirdn2d_parrots(CudaContext &ctx, const SSElement &attr,
+void upfirdn2d_parrots(DeviceContext &ctx, const SSElement &attr,
                        const OperatorBase::in_list_t &ins,
                        OperatorBase::out_list_t &outs) {
   int up_x, up_y, down_x, down_y, pad_x0, pad_x1, pad_y0, pad_y1;

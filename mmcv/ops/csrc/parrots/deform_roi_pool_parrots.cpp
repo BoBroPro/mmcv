@@ -13,7 +13,7 @@ using namespace parrots;
  *                                  int pooled_width, float spatial_scale,
  *                                  int sampling_ratio, float gamma);
  */
-void deform_roi_pool_forward_cuda_parrots(CudaContext& ctx,
+void deform_roi_pool_forward_cuda_parrots(DeviceContext& ctx,
                                           const SSElement& attr,
                                           const OperatorBase::in_list_t& ins,
                                           OperatorBase::out_list_t& outs) {
@@ -47,7 +47,7 @@ void deform_roi_pool_forward_cuda_parrots(CudaContext& ctx,
  *                                   float spatial_scale, int sampling_ratio,
  *                                   float gamma);
  */
-void deform_roi_pool_backward_cuda_parrots(CudaContext& ctx,
+void deform_roi_pool_backward_cuda_parrots(DeviceContext& ctx,
                                            const SSElement& attr,
                                            const OperatorBase::in_list_t& ins,
                                            OperatorBase::out_list_t& outs) {

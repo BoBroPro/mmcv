@@ -8,7 +8,7 @@
 using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
-void sigmoid_focal_loss_forward_cuda_parrots(CudaContext& ctx,
+void sigmoid_focal_loss_forward_cuda_parrots(DeviceContext& ctx,
                                              const SSElement& attr,
                                              const OperatorBase::in_list_t& ins,
                                              OperatorBase::out_list_t& outs) {
@@ -27,7 +27,7 @@ void sigmoid_focal_loss_forward_cuda_parrots(CudaContext& ctx,
 }
 
 void sigmoid_focal_loss_backward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   float gamma;
   float alpha;
@@ -44,7 +44,7 @@ void sigmoid_focal_loss_backward_cuda_parrots(
                                    alpha);
 }
 
-void softmax_focal_loss_forward_cuda_parrots(CudaContext& ctx,
+void softmax_focal_loss_forward_cuda_parrots(DeviceContext& ctx,
                                              const SSElement& attr,
                                              const OperatorBase::in_list_t& ins,
                                              OperatorBase::out_list_t& outs) {
@@ -62,7 +62,7 @@ void softmax_focal_loss_forward_cuda_parrots(CudaContext& ctx,
 }
 
 void softmax_focal_loss_backward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   float gamma;
   float alpha;

@@ -9,7 +9,7 @@ using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
 void modulated_deform_conv_forward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   int kernel_h, kernel_w, stride_h, stride_w, pad_h, pad_w, dilation_h,
       dilation_w, group, deformable_group, with_bias;
@@ -44,7 +44,7 @@ void modulated_deform_conv_forward_cuda_parrots(
 }
 
 void modulated_deform_conv_backward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   int kernel_h, kernel_w, stride_h, stride_w, pad_h, pad_w, dilation_h,
       dilation_w, group, deformable_group, with_bias;

@@ -7,7 +7,7 @@
 using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
-void tin_shift_forward_cuda_parrots(CudaContext &ctx, const SSElement &attr,
+void tin_shift_forward_cuda_parrots(DeviceContext &ctx, const SSElement &attr,
                                     const OperatorBase::in_list_t &ins,
                                     OperatorBase::out_list_t &outs) {
   const auto &input = buildATensor(ctx, ins[0]);
@@ -16,7 +16,7 @@ void tin_shift_forward_cuda_parrots(CudaContext &ctx, const SSElement &attr,
   tin_shift_forward_cuda(input, shift, output);
 }
 
-void tin_shift_backward_cuda_parrots(CudaContext &ctx, const SSElement &attr,
+void tin_shift_backward_cuda_parrots(DeviceContext &ctx, const SSElement &attr,
                                      const OperatorBase::in_list_t &ins,
                                      OperatorBase::out_list_t &outs) {
   const auto &grad_output = buildATensor(ctx, ins[0]);

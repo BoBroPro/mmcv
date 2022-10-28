@@ -8,7 +8,7 @@
 using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
-void deform_conv_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void deform_conv_forward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                       const OperatorBase::in_list_t& ins,
                                       OperatorBase::out_list_t& outs) {
   int kW, kH, dW, dH, padW, padH, dilationW, dilationH, group, deformable_group,
@@ -40,7 +40,7 @@ void deform_conv_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
                       deformable_group, im2col_step);
 }
 
-void deform_conv_backward_input_cuda_parrots(CudaContext& ctx,
+void deform_conv_backward_input_cuda_parrots(DeviceContext& ctx,
                                              const SSElement& attr,
                                              const OperatorBase::in_list_t& ins,
                                              OperatorBase::out_list_t& outs) {
@@ -76,7 +76,7 @@ void deform_conv_backward_input_cuda_parrots(CudaContext& ctx,
 }
 
 void deform_conv_backward_parameters_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   int kW, kH, dW, dH, padW, padH, dilationW, dilationH, group, deformable_group,
       im2col_step;

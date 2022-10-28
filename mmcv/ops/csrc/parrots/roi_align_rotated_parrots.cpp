@@ -7,7 +7,7 @@
 using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
-void roi_align_rotated_forward_cuda_parrots(CudaContext& ctx,
+void roi_align_rotated_forward_cuda_parrots(DeviceContext& ctx,
                                             const SSElement& attr,
                                             const OperatorBase::in_list_t& ins,
                                             OperatorBase::out_list_t& outs) {
@@ -34,7 +34,7 @@ void roi_align_rotated_forward_cuda_parrots(CudaContext& ctx,
                                  aligned, clockwise);
 }
 
-void roi_align_rotated_backward_cuda_parrots(CudaContext& ctx,
+void roi_align_rotated_backward_cuda_parrots(DeviceContext& ctx,
                                              const SSElement& attr,
                                              const OperatorBase::in_list_t& ins,
                                              OperatorBase::out_list_t& outs) {

@@ -9,7 +9,7 @@ using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
 void iou3d_boxes_overlap_bev_forward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   auto boxes_a = buildATensor(ctx, ins[0]);
   auto boxes_b = buildATensor(ctx, ins[1]);
@@ -19,7 +19,7 @@ void iou3d_boxes_overlap_bev_forward_cuda_parrots(
   iou3d_boxes_overlap_bev_forward(boxes_a, boxes_b, ans_iou);
 }
 
-void iou3d_nms3d_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void iou3d_nms3d_forward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                       const OperatorBase::in_list_t& ins,
                                       OperatorBase::out_list_t& outs) {
   float nms_overlap_thresh;
@@ -33,7 +33,7 @@ void iou3d_nms3d_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
   iou3d_nms3d_forward(boxes, keep, keep_num, nms_overlap_thresh);
 }
 
-void iou3d_nms3d_normal_forward_cuda_parrots(CudaContext& ctx,
+void iou3d_nms3d_normal_forward_cuda_parrots(DeviceContext& ctx,
                                              const SSElement& attr,
                                              const OperatorBase::in_list_t& ins,
                                              OperatorBase::out_list_t& outs) {

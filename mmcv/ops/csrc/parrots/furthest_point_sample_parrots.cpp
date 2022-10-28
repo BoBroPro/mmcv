@@ -9,7 +9,7 @@ using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
 void furthest_point_sample_forward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   int b, n, m;
   SSAttrs(attr).get<int>("b", b).get<int>("n", n).get<int>("m", m).done();
@@ -24,7 +24,7 @@ void furthest_point_sample_forward_cuda_parrots(
 }
 
 void furthest_point_sampling_with_dist_forward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   int b, n, m;
   SSAttrs(attr).get<int>("b", b).get<int>("n", n).get<int>("m", m).done();

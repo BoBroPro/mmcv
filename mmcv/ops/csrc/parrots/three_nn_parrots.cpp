@@ -8,7 +8,7 @@
 using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
-void three_nn_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void three_nn_forward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                    const OperatorBase::in_list_t& ins,
                                    OperatorBase::out_list_t& outs) {
   int b, n, m;

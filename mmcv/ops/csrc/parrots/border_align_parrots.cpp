@@ -7,7 +7,7 @@
 
 using namespace parrots;
 
-void border_align_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void border_align_forward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                        const OperatorBase::in_list_t& ins,
                                        OperatorBase::out_list_t& outs) {
   int pool_size;
@@ -21,7 +21,7 @@ void border_align_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
   border_align_forward_cuda(input, boxes, output, argmax_idx, pool_size);
 }
 
-void border_align_backward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void border_align_backward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                         const OperatorBase::in_list_t& ins,
                                         OperatorBase::out_list_t& outs) {
   int pool_size;

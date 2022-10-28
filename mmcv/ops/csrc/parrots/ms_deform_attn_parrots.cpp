@@ -20,7 +20,7 @@ void ms_deform_attn_backward(const Tensor &value, const Tensor &spatial_shapes,
                              Tensor &grad_sampling_loc,
                              Tensor &grad_attn_weight, const int im2col_step);
 
-void ms_deform_attn_forward_parrots(CudaContext &ctx, const SSElement &attr,
+void ms_deform_attn_forward_parrots(DeviceContext &ctx, const SSElement &attr,
                                     const OperatorBase::in_list_t &ins,
                                     OperatorBase::out_list_t &outs) {
   int im2col_step;
@@ -35,7 +35,7 @@ void ms_deform_attn_forward_parrots(CudaContext &ctx, const SSElement &attr,
   updateDArray(ctx, out, outs[0]);
 }
 
-void ms_deform_attn_backward_parrots(CudaContext &ctx, const SSElement &attr,
+void ms_deform_attn_backward_parrots(DeviceContext &ctx, const SSElement &attr,
                                      const OperatorBase::in_list_t &ins,
                                      OperatorBase::out_list_t &outs) {
   int im2col_step;

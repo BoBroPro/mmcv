@@ -30,7 +30,7 @@ void contour_expand_parrots(T& ctx, const SSElement& attr,
   auto tensor = torch::zeros({n, m}, options);
   for (int i = 0; i < n; i++)
     tensor.slice(0, i, i + 1) =
-        torch::from_blob(out[i].data(), {out[i].size()}, options);
+        torch::from_blob(out[i].data(), {static_cast<int64_t>(out[i].size())}, options);
   updateDArray(ctx, tensor, outs[0]);
 }
 

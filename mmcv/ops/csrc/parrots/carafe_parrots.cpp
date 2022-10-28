@@ -13,7 +13,7 @@ using namespace parrots;
  *                          Tensor routput, Tensor rmasks, Tensor output,
  *                          int kernel_size, int group_size, int scale_factor);
  */
-void carafe_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void carafe_forward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                  const OperatorBase::in_list_t& ins,
                                  OperatorBase::out_list_t& outs) {
   int kernel_size, group_size, scale_factor;
@@ -42,7 +42,7 @@ void carafe_forward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
  *                           Tensor bottom_grad, Tensor mask_grad, int
  * kernel_size, int group_size, int scale_factor);
  */
-void carafe_backward_cuda_parrots(CudaContext& ctx, const SSElement& attr,
+void carafe_backward_cuda_parrots(DeviceContext& ctx, const SSElement& attr,
                                   const OperatorBase::in_list_t& ins,
                                   OperatorBase::out_list_t& outs) {
   int kernel_size, group_size, scale_factor;

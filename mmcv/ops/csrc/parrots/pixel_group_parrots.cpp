@@ -36,9 +36,9 @@ void pixel_group_parrots(T& ctx, const SSElement& attr,
   for (int i = 0; i < n; ++i)
     out_tensor.insert(out_tensor.end(), out[i].begin(), out[i].end());
   auto options = torch::TensorOptions().dtype(at::kFloat);
-  auto tensor = torch::zeros({1, out_tensor.size()}, options);
+  auto tensor = torch::zeros({1, static_cast<int32_t>(out_tensor.size())}, options);
   tensor.slice(0, 0, 1) =
-      torch::from_blob(out_tensor.data(), {out_tensor.size()}, options);
+      torch::from_blob(out_tensor.data(), {static_cast<int32_t>(out_tensor.size())}, options);
   updateDArray(ctx, tensor, outs[0]);
 }
 
@@ -49,6 +49,6 @@ PARROTS_EXTENSION_REGISTER(pixel_group)
     .output(1)
     .apply(pixel_group_parrots<HostContext>)
 #ifdef MMCV_WITH_CUDA
-    .apply(pixel_group_parrots<CudaContext>)
+    .apply(pixel_group_parrots<DeviceContext>)
 #endif
     .done();

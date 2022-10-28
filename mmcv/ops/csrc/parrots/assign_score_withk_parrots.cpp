@@ -8,7 +8,7 @@
 using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
-void assign_score_withk_forward_cuda_parrots(CudaContext& ctx,
+void assign_score_withk_forward_cuda_parrots(DeviceContext& ctx,
                                              const SSElement& attr,
                                              const OperatorBase::in_list_t& ins,
                                              OperatorBase::out_list_t& outs) {
@@ -34,7 +34,7 @@ void assign_score_withk_forward_cuda_parrots(CudaContext& ctx,
 }
 
 void assign_score_withk_backward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   int B, N0, N1, M, K, O, aggregate;
   SSAttrs(attr)

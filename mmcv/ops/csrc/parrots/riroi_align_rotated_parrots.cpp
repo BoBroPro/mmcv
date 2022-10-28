@@ -8,7 +8,7 @@ using namespace parrots;
 
 #ifdef MMCV_WITH_CUDA
 void riroi_align_rotated_forward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   int pooled_height;
   int pooled_width;
@@ -34,7 +34,7 @@ void riroi_align_rotated_forward_cuda_parrots(
 }
 
 void riroi_align_rotated_backward_cuda_parrots(
-    CudaContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
+    DeviceContext& ctx, const SSElement& attr, const OperatorBase::in_list_t& ins,
     OperatorBase::out_list_t& outs) {
   int pooled_height;
   int pooled_width;
