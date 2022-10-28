@@ -589,19 +589,20 @@ CUDA_INCLUDE_MAP = collections.OrderedDict(
         ("nvToolsExt.h", ("roctx.h", CONV_INCLUDE, API_ROCTX)),
 
         # for mmcv 1.5.3 adapting for pytorch1.7.
-        ("../spconv_utils.h", ("spconv_utils.h", MMCV_INCLUDE, API_ROCTX)),
-        ("utils/spconv/spconv/indice.h", ("spconv/spconv/hip/indice.h", MMCV_INCLUDE, API_ROCTX)),
-        ("utils/spconv/spconv/reordering.h", ("spconv/spconv/hip/reordering.h", MMCV_INCLUDE, API_ROCTX)),
-        ("utils/spconv/spconv/maxpool.h", ("spconv/spconv/hip/maxpool.h", MMCV_INCLUDE, API_ROCTX)),
-        ("utils/spconv/spconv/geometry.h", ("spconv/spconv/hip/geometry.h", MMCV_INCLUDE, API_ROCTX)),
-        ("utils/spconv/spconv/mp_helper.h", ("spconv/spconv/hip/mp_helper.h", MMCV_INCLUDE, API_ROCTX)),
-        ("utils/spconv/spconv/point2voxel.h", ("spconv/spconv/hip/point2voxel.h", MMCV_INCLUDE, API_ROCTX)),
-        ("utils/spconv/tensorview/helper_launch.h", ("spconv/tensorview/hip/helper_launch.h", MMCV_INCLUDE, API_ROCTX)),
-        ("utils/spconv/tensorview/tensorview.h", ("spconv/tensorview/hip/tensorview.h", MMCV_INCLUDE, API_ROCTX)),
-        ("utils/spconv/tensorview/helper_kernel.cuh", ("spconv/tensorview/hip/helper_kernel.cuh", MMCV_INCLUDE, API_ROCTX)),
-        ("utils/spconv/paramsgrid.h", ("spconv/hip/paramsgrid.h", MMCV_INCLUDE, API_ROCTX)),
-        ("utils/spconv/prettyprint.h", ("spconv/hip/prettyprint.h", MMCV_INCLUDE, API_ROCTX)),
-        ("utils/spconv/pybind11_utils.h", ("spconv/hip/pybind11_utils.h", MMCV_INCLUDE, API_ROCTX)),
+        # ("../spconv_utils.h", ("spconv_utils.h", MMCV_INCLUDE, API_ROCTX)),
+        # ("utils/spconv/spconv/indice.h", ("spconv/spconv/hip/indice.h", MMCV_INCLUDE, API_ROCTX)),
+        # ("utils/spconv/spconv/reordering.h", ("spconv/spconv/hip/reordering.h", MMCV_INCLUDE, API_ROCTX)),
+        # ("utils/spconv/spconv/maxpool.h", ("spconv/spconv/hip/maxpool.h", MMCV_INCLUDE, API_ROCTX)),
+        # ("utils/spconv/spconv/geometry.h", ("spconv/spconv/hip/geometry.h", MMCV_INCLUDE, API_ROCTX)),
+        # ("utils/spconv/spconv/mp_helper.h", ("spconv/spconv/hip/mp_helper.h", MMCV_INCLUDE, API_ROCTX)),
+        # ("utils/spconv/spconv/point2voxel.h", ("spconv/spconv/hip/point2voxel.h", MMCV_INCLUDE, API_ROCTX)),
+        # ("utils/spconv/tensorview/helper_launch.h", ("spconv/tensorview/hip/helper_launch.h", MMCV_INCLUDE, API_ROCTX)),
+        # ("utils/spconv/tensorview/tensorview.h", ("spconv/tensorview/hip/tensorview.h", MMCV_INCLUDE, API_ROCTX)),
+        # ("utils/spconv/tensorview/helper_kernel.cuh", ("spconv/tensorview/hip/helper_kernel.cuh", MMCV_INCLUDE, API_ROCTX)),
+        # ("utils/spconv/paramsgrid.h", ("spconv/hip/paramsgrid.h", MMCV_INCLUDE, API_ROCTX)),
+        # ("utils/spconv/prettyprint.h", ("spconv/hip/prettyprint.h", MMCV_INCLUDE, API_ROCTX)),
+        # ("utils/spconv/pybind11_utils.h", ("spconv/hip/pybind11_utils.h", MMCV_INCLUDE, API_ROCTX)),
+         ("../spconv_utils.h", ("spconv_utils.h", MMCV_INCLUDE, API_ROCTX))
 
     ]
 )
@@ -609,9 +610,6 @@ CUDA_INCLUDE_MAP = collections.OrderedDict(
 CUDA_IDENTIFIER_MAP = collections.OrderedDict(
     [
         ("__CUDACC__", ("__HIPCC__", CONV_DEF, API_RUNTIME)),
-        # mmcv
-        ("__NVCC__", ("__HIPCC__", CONV_DEF, API_RUNTIME)),
-
         (
             "CUDA_ERROR_INVALID_CONTEXT",
             ("hipErrorInvalidContext", CONV_TYPE, API_DRIVER),
@@ -8126,6 +8124,25 @@ C10_MAPPINGS = collections.OrderedDict(
     ]
 )
 
+C10_SPECIFIC_MAPPINGS = collections.OrderedDict(
+    [
+        # for mmcv 1.5.3 adapting for pytorch1.7.
+        ("__NVCC__", ("__HIPCC__", CONV_DEF, API_RUNTIME)),
+        ("../spconv_utils.h", ("spconv_utils.h", MMCV_INCLUDE)),
+        ("utils/spconv/spconv/indice.h", ("utils/spconv/spconv/hip/indice.h", MMCV_INCLUDE)),
+        ("utils/spconv/spconv/reordering.h", ("utils/spconv/spconv/hip/reordering.h", MMCV_INCLUDE)),
+        ("utils/spconv/spconv/maxpool.h", ("utils/spconv/spconv/hip/maxpool.h", MMCV_INCLUDE)),
+        ("utils/spconv/spconv/geometry.h", ("utils/spconv/spconv/hip/geometry.h", MMCV_INCLUDE,)),
+        ("utils/spconv/spconv/mp_helper.h", ("utils/spconv/spconv/hip/mp_helper.h", MMCV_INCLUDE)),
+        ("utils/spconv/spconv/point2voxel.h", ("utils/spconv/spconv/hip/point2voxel.h", MMCV_INCLUDE)),
+        ("utils/spconv/tensorview/helper_launch.h", ("utils/spconv/tensorview/hip/helper_launch.h", MMCV_INCLUDE)),
+        ("utils/spconv/tensorview/tensorview.h", ("utils/spconv/tensorview/hip/tensorview.h", MMCV_INCLUDE)),
+        ("utils/spconv/tensorview/helper_kernel.cuh", ("utils/spconv/tensorview/hip/helper_kernel.cuh", MMCV_INCLUDE)),
+        ("utils/spconv/paramsgrid.h", ("utils/spconv/hip/paramsgrid.h", MMCV_INCLUDE)),
+        ("utils/spconv/prettyprint.h", ("utils/spconv/hip/prettyprint.h", MMCV_INCLUDE)),
+        ("utils/spconv/pybind11_utils.h", ("utils/spconv/hip/pybind11_utils.h", MMCV_INCLUDE)),
+    ]
+)
 # NB: C10 mappings are more specific than Caffe2 mappings, so run them
 # first
 CUDA_TO_HIP_MAPPINGS = [
@@ -8136,4 +8153,5 @@ CUDA_TO_HIP_MAPPINGS = [
     C10_MAPPINGS,
     PYTORCH_SPECIFIC_MAPPINGS,
     CAFFE2_SPECIFIC_MAPPINGS,
+    C10_SPECIFIC_MAPPINGS,
 ]

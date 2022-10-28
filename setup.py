@@ -203,28 +203,60 @@ def get_extensions():
     if EXT_TYPE == 'parrots':
         ext_name = 'mmcv._ext'
         from parrots.utils.build_extension import Extension
-
         # new parrots op impl do not use MMCV_USE_PARROTS
         # define_macros = [('MMCV_USE_PARROTS', None)]
         define_macros = []
         include_dirs = []
-        op_files = glob.glob('./mmcv/ops/csrc/pytorch/cuda/*.cu') +\
-            glob.glob('./mmcv/ops/csrc/pytorch/cpu/*.cpp') +\
-            glob.glob('./mmcv/ops/csrc/parrots/*.cpp')
-        include_dirs.append(os.path.abspath('./mmcv/ops/csrc/common'))
-        include_dirs.append(os.path.abspath('./mmcv/ops/csrc/common/cuda'))
-        cuda_args = os.getenv('MMCV_CUDA_ARGS')
-        extra_compile_args = {
-            'nvcc': [cuda_args, '-std=c++14'] if cuda_args else ['-std=c++14'],
-            'cxx': ['-std=c++14'],
-        }
-        if torch.cuda.is_available() or os.getenv('FORCE_CUDA', '0') == '1':
+        extra_compile_args = {'cxx': []}
+        is_rocm_parrots = False
+        try:
+            from parrots.utils.build_extension import ROCM_HOME
+            is_rocm_parrots = True if (ROCM_HOME is not None) else False
+        except ImportError:
+            pass
+        project_dir = 'mmcv/ops/csrc/'
+        if is_rocm_parrots:
+            from hipify import hipify_python
+            hipify_python.hipify(
+                project_directory=project_dir,
+                output_directory=project_dir,
+                includes='mmcv/ops/csrc/*',
+                show_detailed=True,
+                is_pytorch_extension=True,
+            )
+            define_macros += [('HIP_DIFF', None)]
             define_macros += [('MMCV_WITH_CUDA', None)]
-            extra_compile_args['nvcc'] += [
-                '-D__CUDA_NO_HALF_OPERATORS__',
-                '-D__CUDA_NO_HALF_CONVERSIONS__',
-                '-D__CUDA_NO_HALF2_OPERATORS__',
-            ]
+            cuda_args = os.getenv('MMCV_CUDA_ARGS')
+            extra_compile_args['nvcc'] = [cuda_args] if cuda_args else []
+            op_files = glob.glob('./mmcv/ops/csrc/pytorch/hip/*.hip') \
+                + glob.glob('./mmcv/ops/csrc/pytorch/cpu/*.cpp') \
+                + glob.glob('./mmcv/ops/csrc/parrots/hip/*.cpp')
+            include_dirs.append(os.path.abspath('./mmcv/ops/csrc/common/hip'))
+            include_dirs.append(os.path.abspath('./mmcv/ops/csrc/common'))
+            # parrots pybind11 is not compatible with mmcv, so using the specific pybind11.
+            pybind11 = os.getenv('PYBIND11_PATH', '0')
+            if pybind11 == "0":
+                raise EnvironmentError('PYBIND11_PATH environment variable is not set. '
+                               'Please set it.')
+            include_dirs.append(pybind11 + '/include')
+        else:
+            op_files = glob.glob('./mmcv/ops/csrc/pytorch/cuda/*.cu') +\
+                glob.glob('./mmcv/ops/csrc/pytorch/cpu/*.cpp') +\
+                glob.glob('./mmcv/ops/csrc/parrots/*.cpp')
+            include_dirs.append(os.path.abspath('./mmcv/ops/csrc/common'))
+            include_dirs.append(os.path.abspath('./mmcv/ops/csrc/common/cuda'))
+            cuda_args = os.getenv('MMCV_CUDA_ARGS')
+            extra_compile_args = {
+                'nvcc': [cuda_args, '-std=c++14'] if cuda_args else ['-std=c++14'],
+                'cxx': ['-std=c++14'],
+            }
+            if torch.cuda.is_available() or os.getenv('FORCE_CUDA', '0') == '1':
+                define_macros += [('MMCV_WITH_CUDA', None)]
+                extra_compile_args['nvcc'] += [
+                    '-D__CUDA_NO_HALF_OPERATORS__',
+                    '-D__CUDA_NO_HALF_CONVERSIONS__',
+                    '-D__CUDA_NO_HALF2_OPERATORS__',
+                ]
         ext_ops = Extension(
             name=ext_name,
             sources=op_files,
@@ -299,7 +331,6 @@ def get_extensions():
             include_dirs.append(os.path.abspath('./mmcv/ops/csrc/common/utils'))
         elif torch.cuda.is_available() or os.getenv(
                 'FORCE_CUDA', '0') == '1':
-            import pdb;pdb.set_trace()
             if is_rocm_pytorch:
                 define_macros += [('HIP_DIFF', None)]
             define_macros += [('MMCV_WITH_CUDA', None)]
@@ -416,7 +447,7 @@ setup(
     description='OpenMMLab Computer Vision Foundation',
     keywords='computer vision',
     packages=find_packages(),
-    include_package_data=True,
+    #include_package_data=True,
     classifiers=[
         'Development Status :: 4 - Beta',
         'License :: OSI Approved :: Apache Software License',
