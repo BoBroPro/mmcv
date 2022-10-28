@@ -328,7 +328,7 @@ def get_extensions():
                 + glob.glob('./mmcv/ops/csrc/pytorch/hip/*.cpp')
             extension = CUDAExtension
             include_dirs.append(os.path.abspath('./mmcv/ops/csrc/common/hip'))
-            include_dirs.append(os.path.abspath('./mmcv/ops/csrc/common/utils'))
+            include_dirs.append(os.path.abspath('./mmcv/ops/csrc/common'))
         elif torch.cuda.is_available() or os.getenv(
                 'FORCE_CUDA', '0') == '1':
             if is_rocm_pytorch:
